@@ -17,6 +17,7 @@
 #include <libhal-arm-mcu/lpc40/constants.hpp>
 #include <libhal-arm-mcu/lpc40/output_pin.hpp>
 #include <libhal-arm-mcu/lpc40/uart.hpp>
+#include <libhal-arm-mcu/lpc40/i2c.hpp>
 #include <libhal-arm-mcu/system_control.hpp>
 
 #include <resource_list.hpp>
@@ -42,5 +43,11 @@ void initialize_platform(resource_list& p_list)
                                 hal::serial::settings{
                                   .baud_rate = 115200,
                                 });
+
+
+  static hal::lpc40::i2c i2c2(2, hal::i2c::settings {
+      .clock_rate = 100.0_kHz,
+  });
+
   p_list.console = &uart0;
 }
